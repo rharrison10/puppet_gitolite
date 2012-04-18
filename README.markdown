@@ -15,7 +15,7 @@ admin will be identified by.
 Verify the hooks directories are in place and installs some utility hooks
 to make it possible to run multiple hook scripts for each hook stage.
 
-### gitolite::hooks::post_recieve_email
+### gitolite::hooks::post_receive_email
 
 Installs the standard email hook from `contrib/hooks` provided with `git`.
 
@@ -33,7 +33,7 @@ This contains the `exec` resource required to update the gitolite configuration.
 
 ## Defined Types
 
-### gitolite::hooks::post_recieve
+### gitolite::hooks::post_receive
 
 Installs a post-receive hook script to be run on the repositories managed
 by `gitolite`.
@@ -57,7 +57,7 @@ by `gitolite`.
          require        => File['/srv/git'],
        }
        
-       gitolite::hooks::post_receive { 'example_post_recieve' :
-         source => 'puppet:///modules/gitolitetest/example_post_recieve.sh',
+       gitolite::hooks::post_receive { 'example_post_receive' :
+         source => 'puppet:///modules/gitolitetest/example_post_receive.sh',
        }
      }
