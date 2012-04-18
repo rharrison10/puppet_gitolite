@@ -53,8 +53,8 @@ class gitolite (
         $admin_key,
         $admin_user,
         $gitconfig_keys = '',
-        $gitoliterc_content = template('gitolite/gitolite.rc.erb'),
-        $gitoliterc_source = '',
+        $gitoliterc_content = 'UNSET',
+        $gitoliterc_source = 'UNSET',
         $repo_base = 'repositories',
         $repo_umask = '0077'
     ){
@@ -62,6 +62,11 @@ class gitolite (
     include gitolite::package
     include gitolite::params
     include gitolite::refresh
+
+    $gitoliterc_content_real = $gitoliterc_content ? {
+        'UNSET' =>  template('gitolite/gitolite.rc.erb'),
+        default =>  $gitoliterc_content,
+    }
 
     $repo_base_dir = $repo_base ? {
         'repositories'  =>  "${gitolite::params::home}/repositories",
@@ -87,10 +92,10 @@ class gitolite (
         require => Package['gitolite'],
     }
 
-    if $gitolite::gitoliterc_source == '' {
+    if $gitolite::gitoliterc_source == 'UNSET' {
         file { $gitolite::params::gitoliterc_file :
             ensure  =>  file,
-            content =>  $gitoliterc_content,
+            content =>  $gitoliterc_content_real,
             owner   => 'gitolite',
             group   => 'gitolite',
             mode    => '0644',
