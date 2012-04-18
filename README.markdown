@@ -35,7 +35,7 @@ This contains the `exec` resource required to update the gitolite configuration.
 
 ### gitolite::hooks::post_recieve
 
-Installs a post-recieve hook script to be run on the repositories managed
+Installs a post-receive hook script to be run on the repositories managed
 by `gitolite`.
 
 ## Examples:
@@ -57,7 +57,7 @@ by `gitolite`.
          require        => File['/srv/git'],
        }
        
-       gitolite::hooks::post_recieve { 'example_post_recieve' :
+       gitolite::hooks::post_receive { 'example_post_recieve' :
          source => 'puppet:///modules/gitolitetest/example_post_recieve.sh',
        }
      }

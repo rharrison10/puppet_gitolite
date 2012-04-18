@@ -1,4 +1,4 @@
-define gitolite::hooks::post_recieve (
+define gitolite::hooks::post_receive (
         $content = '',
         $source = ''
     ){

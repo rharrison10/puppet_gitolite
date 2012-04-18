@@ -1,6 +1,6 @@
-class gitolite::hooks::post_recieve_email {
+class gitolite::hooks::post_receive_email {
 
-    gitolite::hooks::post_recieve { 'post-receive-email' :
+    gitolite::hooks::post_receive { 'post-receive-email' :
         source  =>  'puppet:///modules/gitolite/post-receive-email.sh',
     }
 }
