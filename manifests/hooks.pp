@@ -1,3 +1,28 @@
+# == Class: gitolite::hooks
+#
+# Verify the hooks directories are in place and installs some utility hooks
+# to make it possible to run multiple hook scripts for each hook stage
+#
+# === Parameters
+#
+# None
+#
+# === Examples
+#
+#  class { 'gitolite' :
+#    admin_key      => 'puppet:///modules/gitolitetest/username.pub',
+#    admin_user     => 'username',
+#  }
+#  include gitolite::hooks
+#
+# === Authors
+#
+# Russell Harrison <rharriso@redhat.com>
+#
+# === Copyright
+#
+# Copyright 2012 Russell Harrison, unless otherwise noted.
+#
 class gitolite::hooks {
     include gitolite::package
     include gitolite::params

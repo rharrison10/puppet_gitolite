@@ -1,54 +1,53 @@
-# Class: gitolite
+# == Class: gitolite
 #
-# This module manages gitolite
+# This module manages gitolite servers
 #
-# Parameters:
+# === Parameters:
 #
-#  admin_key : The public key of the lead gitolite administrator
-#       used in intial setup
+# [*admin_key*]
+#   The public key of the lead gitolite administrator used in
+#   intial setup
 #
-#  admin_user : The username of the lead gitolite admin
+# [*admin_user*]
+#   The username of the lead gitolite admin
 #
-#  gitoliterc_content   : Template or string providing the content
-#       for .gitolite.rc
+# [*gitoliterc_content*]
+#   String providing the content for .gitolite.rc
 #
-#  gitoliterc_source : Location of the .gitolite.rc source file
+# [*gitoliterc_source*]
+#   Location of the .gitolite.rc source file
 #
-#  repo_base : Directory where gitolite repositories will be
-#       created / managed.
-#       NOTE parent directories of this directory are managed outside
-#       of this module and so remember to call this class with
-#       require => File['parentdir'] so it is present before this
-#       module creates the repo_base
+# [*repo_base*]
+#   Directory where gitolite repositories will be created / managed.
+#   *NOTE* parent directories of this directory will need to be managed
+#   outside of this module so remember to call this class with
+#   +require => File['parentdir'],+ so it is present before this
+#   module creates the +repo_base+ directory under its parrents
 #
-#  repo_umask : The umask gitolite will use when performing operations
-#       on the repositories it manages
+# [*repo_umask*]
+#   The umask gitolite will use when performing operations on the
+#   repositories it manages
 #
-# Actions:
+# === Examples:
 #
-# Requires:
+#  class gitolitetest {
+#    file { '/srv/git' :
+#      ensure => directory,
+#      owner  => 'root',
+#      group  => 'root',
+#      mode   => '0755',
+#    }
 #
-# Sample Usage:
-#
-# class gitolitetest {
-#  file { '/srv/git' :
-#    ensure => directory,
-#    owner  => 'root',
-#    group  => 'root',
-#    mode   => '0755',
+#    class { 'gitolite' :
+#      admin_key      => 'puppet:///modules/gitolitetest/username.pub',
+#      admin_user     => 'username',
+#      gitconfig_keys => '.*',
+#      repo_base      => '/srv/git/repositories',
+#      repo_umask     => '0022',
+#      require        => File['/srv/git'],
+#    }
 #  }
 #
-# class { 'gitolite' :
-#    admin_key      => 'puppet:///modules/gitolitetest/username.pub',
-#    admin_user     => 'username',
-#    gitconfig_keys => '.*',
-#    repo_base      => '/srv/git/repositories',
-#    repo_umask     => '0022',
-#    require        => File['/srv/git'],
-#  }
-# }
-#
-# [Remember: No empty lines between comments and class definition]
 class gitolite (
         $admin_key,
         $admin_user,
