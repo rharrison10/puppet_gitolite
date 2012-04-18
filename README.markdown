@@ -56,4 +56,8 @@ by `gitolite`.
          repo_umask     => '0022',
          require        => File['/srv/git'],
        }
+       
+       gitolite::hooks::post_recieve { 'example_post_recieve' :
+         source => 'puppet:///modules/gitolitetest/example_post_recieve.sh',
+       }
      }
