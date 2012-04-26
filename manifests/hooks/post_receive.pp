@@ -1,32 +1,32 @@
 define gitolite::hooks::post_receive (
-        $content = '',
-        $source = ''
-    ){
+    $content = '',
+    $source = ''
+  ){
 
-    include gitolite::package
-    include gitolite::params
-    include gitolite::hooks
-    include gitolite::refresh
+  include gitolite::package
+  include gitolite::params
+  include gitolite::hooks
+  include gitolite::refresh
 
-    $filename = "${gitolite::params::common_hook_dir}/post-receive.d/${name}"
+  $filename = "${gitolite::params::common_hook_dir}/post-receive.d/${name}"
 
-    File {
-        ensure  =>  file,
-        owner   =>  'gitolite',
-        group   =>  'gitolite',
-        mode    =>  '0755',
-        require =>  Package['gitolite'],
-        notify  =>  Exec['gl-setup -q'],
+  File {
+    ensure  =>  file,
+    owner   =>  'gitolite',
+    group   =>  'gitolite',
+    mode    =>  '0755',
+    require =>  Package['gitolite'],
+    notify  =>  Exec['gl-setup -q'],
+  }
+
+  if $source == '' {
+    file { $filename :
+        content  =>  $content,
     }
-
-    if $source == '' {
-        file { $filename :
-            content  =>  $content,
-        }
-    } else {
-        file { $filename :
-            source  =>  $source,
-        }
+  } else {
+    file { $filename :
+      source  =>  $source,
     }
+  }
 
 }
