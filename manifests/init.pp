@@ -122,13 +122,10 @@ class gitolite (
   if $gitoliterc_source and $gitoliterc_template {
     fail('You cannot supply both template and source for the .gitoliterc file')
   } elsif $gitoliterc_source == '' and $gitoliterc_template == '' {
-    $gitoliterc_source_real = undef
-    $gitoliterc_template_real = $gitoliterc_template
+    $gitoliterc_template_real = template('gitolite/gitolite.rc.erb')
   } elsif $gitoliterc_source != '' {
     $gitoliterc_source_real = $gitoliterc_source
-    $gitoliterc_template_real = undef
   } elsif $gitoliterc_template != '' {
-    $gitoliterc_source_real = undef
     $gitoliterc_template_real = $gitoliterc_template
   }
 

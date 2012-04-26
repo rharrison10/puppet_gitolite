@@ -19,20 +19,20 @@
     "manifests/hooks.pp": "8a0b18499e45a9091d5e810c97b55cb9",
     "manifests/hooks/post_receive.pp": "5e8ea323357b79d809509c2615acf9f1",
     "manifests/hooks/post_receive_email.pp": "9c7f1bd604b35a0761707e2ec9482170",
-    "manifests/init.pp": "9e0a3f26a38620a630187d0bc37d9020",
+    "manifests/init.pp": "35718150670dd522c0cc86881783aa3d",
     "manifests/package.pp": "acc1014ef4eb430bb40a752c98826417",
     "manifests/params.pp": "f10c040eddcf10c39dca68033b559012",
-    "manifests/refresh.pp": "203ba30f5e38d6a6231ed12f1cf13dec",
+    "manifests/refresh.pp": "68c9d7acf7f2cf61fcf179574c952f54",
     "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
     "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
     "templates/gitolite.rc.erb": "a77975c5a4a19c6f57a846ff3ab0d9d5",
-    "tests/hooks.pp": "64853df792770e28497481ba65640b42",
-    "tests/hooks/post_receive.pp": "7a3063a36ecbe0d7302eede585af5c75",
-    "tests/hooks/post_receive_email.pp": "503a46dbffdddded675d0b8bd123ea88",
+    "tests/hooks.pp": "70c2d4230771b03e120c32cf0f241809",
+    "tests/hooks/post_receive.pp": "3423b4f0a3531a6e02b5fdc115a66a46",
+    "tests/hooks/post_receive_email.pp": "0b02d6726aff6ec3c4aea22d0e25ca3f",
     "tests/init.pp": "3f2c7e3aff4200761652fa1c55e18b51",
     "tests/package.pp": "a137428ab9794736265d21bb00a56807",
     "tests/params.pp": "72e95f036e75108603623db92dd42fb7",
-    "tests/refresh.pp": "b14fe1301c69f71004909d4f917ff202"
+    "tests/refresh.pp": "20dacc730561fe4d81efdfb1ece42c88"
   },
   "dependencies": []
 }

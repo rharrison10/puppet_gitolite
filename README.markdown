@@ -49,12 +49,12 @@ by `gitolite`.
        }
     
        class { 'gitolite' :
-         admin_key      => 'puppet:///modules/gitolitetest/username.pub',
-         admin_user     => 'username',
-         gitconfig_keys => '.*',
-         repo_base      => '/srv/git/repositories',
-         repo_umask     => '0022',
-         require        => File['/srv/git'],
+         admin_key_source => 'puppet:///modules/gitolitetest/username.pub',
+         admin_user       => 'username',
+         gitconfig_keys   => '.*',
+         repo_base        => '/srv/git/repositories',
+         repo_umask       => '0022',
+         require          => File['/srv/git'],
        }
        
        gitolite::hooks::post_receive { 'example_post_receive' :
