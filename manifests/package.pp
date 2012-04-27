@@ -22,14 +22,15 @@ class gitolite::package {
   include gitolite::params
 
   user { $gitolite::params::user :
-    ensure  =>  present,
-    comment =>  $gitolite::params::user_comment,
-    uid     =>  $gitolite::params::user_uid,
-    gid     =>  $gitolite::params::group,
-    groups  =>  $gitolite::params::user_groups,
-    home    =>  $gitolite::params::home,
-    shell   =>  $gitolite::params::user_shell,
-    system  =>  true,
+    ensure      =>  present,
+    comment     =>  $gitolite::params::user_comment,
+    uid         =>  $gitolite::params::user_uid,
+    gid         =>  $gitolite::params::group,
+    groups      =>  $gitolite::params::user_groups,
+    membership  =>  minimum,
+    home        =>  $gitolite::params::home,
+    shell       =>  $gitolite::params::user_shell,
+    system      =>  true,
   }
 
   group { $gitolite::params::group :
