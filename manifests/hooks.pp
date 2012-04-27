@@ -9,12 +9,10 @@
 #
 # === Examples
 #
-#  class test {
-#    include gitolite::hooks
-#    class { 'gitolite' :
-#      admin_key_source => 'puppet:///modules/test/id_rsa_test.pub',
-#      admin_user       => 'testuser',
-#    }
+#  include gitolite::hooks
+#  class { 'gitolite' :
+#    admin_key_source => 'puppet:///modules/gitolite/id_rsa_test.pub',
+#    admin_user       => 'testuser',
 #  }
 #
 # === Authors

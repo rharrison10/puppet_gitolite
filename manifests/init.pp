@@ -43,7 +43,7 @@
 #
 # === Examples:
 #
-#  class gitolitetest {
+#  class test {
 #    file { '/srv/git' :
 #      ensure => directory,
 #      owner  => 'root',
@@ -52,7 +52,7 @@
 #    }
 #
 #    class { 'gitolite' :
-#      admin_key_source => 'puppet:///modules/gitolitetest/username.pub',
+#      admin_key_source => 'puppet:///modules/test/id_rsa_test.pub',
 #      admin_user       => 'username',
 #      gitconfig_keys   => '.*',
 #      repo_base        => '/srv/git/repositories',

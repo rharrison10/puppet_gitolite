@@ -6,10 +6,6 @@
 #
 # none
 #
-# === Variables
-#
-# none
-#
 # === Examples
 #
 #  include gitolite::refresh
