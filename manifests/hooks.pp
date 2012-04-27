@@ -9,11 +9,13 @@
 #
 # === Examples
 #
-#  class { 'gitolite' :
-#    admin_key      => 'puppet:///modules/gitolitetest/username.pub',
-#    admin_user     => 'username',
+#  class test {
+#    include gitolite::hooks
+#    class { 'gitolite' :
+#      admin_key_source => 'puppet:///modules/test/id_rsa_test.pub',
+#      admin_user       => 'testuser',
+#    }
 #  }
-#  include gitolite::hooks
 #
 # === Authors
 #
@@ -32,6 +34,7 @@ class gitolite::hooks {
     "${gitolite::params::admindir}/hooks",
     $gitolite::params::common_hook_dir,
     "${gitolite::params::common_hook_dir}/post-receive.d",
+    "${gitolite::params::home}/tmp",
   ]
 
   file { $hook_dirs :
