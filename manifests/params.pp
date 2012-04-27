@@ -25,14 +25,50 @@
 # Copyright 2012 Russell Harrison, unless otherwise noted.
 #
 class gitolite::params {
+
   $package = $::operatingsystem ? {
     /(CentOS|Fedora|RedHat)/  => 'gitolite',
     default                   => 'gitolite',
   }
 
+  $user = $::operatingsystem ? {
+    /(CentOS|Fedora|RedHat)/  => 'gitolite',
+    default                   => 'gitolite',
+  }
+
+  $user_comment = $::operatingsystem ? {
+    /(CentOS|Fedora|RedHat)/  => 'git repository hosting',
+    default                   => 'git repository hosting',
+  }
+
+  $user_uid = $::operatingsystem ? {
+    /(CentOS|Fedora|RedHat)/  => undef,
+    default                   => undef,
+  }
+
+  $user_groups = $::operatingsystem ? {
+    /(CentOS|Fedora|RedHat)/  => undef,
+    default                   => undef,
+  }
+
+  $user_shell = $::operatingsystem ? {
+    /(CentOS|Fedora|RedHat)/  => '/bin/sh',
+    default                   => '/bin/sh',
+  }
+
   $home = $::operatingsystem ? {
     /(CentOS|Fedora|RedHat)/  => '/var/lib/gitolite',
     default                   => '/var/lib/gitolite',
+  }
+
+  $group = $::operatingsystem ? {
+    /(CentOS|Fedora|RedHat)/  => 'gitolite',
+    default                   => 'gitolite',
+  }
+
+  $group_gid = $::operatingsystem ? {
+    /(CentOS|Fedora|RedHat)/  => undef,
+    default                   => undef,
   }
 
   $admindir = "${home}/.gitolite"
