@@ -52,12 +52,12 @@
 #    }
 #
 #    class { 'gitolite' :
-#      admin_key_source => 'puppet:///modules/test/id_rsa_test.pub',
-#      admin_user       => 'username',
-#      gitconfig_keys   => '.*',
-#      repo_base        => '/srv/git/repositories',
-#      repo_umask       => '0022',
-#      require          => File['/srv/git'],
+#      admin_key_source   => 'puppet:///modules/test/id_rsa_test.pub',
+#      admin_user         => 'username',
+#      gl_gitconfig_keys  => '.*',
+#      repo_base          => '/srv/git/repositories',
+#      repo_umask         => '0022',
+#      require            => File['/srv/git'],
 #    }
 #  }
 #
