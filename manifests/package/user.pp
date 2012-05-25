@@ -46,7 +46,7 @@ class gitolite::package::user (
 
    case $gid {
     undef: {
-      $gid_real = $gitolite::params::group
+      $gid_real = $gitolite::params::group_gid
       $group_requires = Package[$gitolite::params::package]
     }
     default: {

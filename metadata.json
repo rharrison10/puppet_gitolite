@@ -21,7 +21,7 @@
     "manifests/hooks/post_receive_email.pp": "4f7a126d2784f0f5ea39097b22d73f69",
     "manifests/init.pp": "77e9b00f479655b21dbbfaac7c74e789",
     "manifests/package.pp": "d64fe8b4c93396626be80a0c1070b181",
-    "manifests/package/user.pp": "0d8b129e18ff8a3668a856d68f7016c4",
+    "manifests/package/user.pp": "0bc90fa720d21eecf60b41b4227fa197",
     "manifests/params.pp": "52f0fbe1b06b05b0022b359beda34209",
     "manifests/refresh.pp": "3e1791267c8ec7d7cf9da177416abf6f",
     "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
