@@ -21,6 +21,17 @@
 class gitolite::package {
   include gitolite::params
 
+  package { $gitolite::params::package :
+    ensure  =>  present,
+    alias   =>  'gitolite',
+  }
+
+  group { $gitolite::params::group :
+    ensure  =>  present,
+    gid     =>  $gitolite::params::group_gid,
+    require =>  Package[$gitolite::params::package],
+  }
+
   user { $gitolite::params::user :
     ensure      =>  present,
     comment     =>  $gitolite::params::user_comment,
@@ -30,20 +41,8 @@ class gitolite::package {
     membership  =>  minimum,
     home        =>  $gitolite::params::home,
     shell       =>  $gitolite::params::user_shell,
-    system      =>  true,
-  }
-
-  group { $gitolite::params::group :
-    ensure  =>  present,
-    gid     =>  $gitolite::params::group_gid,
-    system  =>  true,
-  }
-
-  package { $gitolite::params::package :
-    ensure  =>  present,
-    alias   =>  'gitolite',
-    require =>  [
-      User[$gitolite::params::user],
+    require     =>  [
+      Package[$gitolite::params::package],
       Group[$gitolite::params::group],
     ],
   }

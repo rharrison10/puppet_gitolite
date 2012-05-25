@@ -11,10 +11,13 @@
 #   specific uid to user for the gitolite user
 #
 # [*gid*]
-#   Primary group for the gitolite user
+#   gid for the gitolite user's primary group
 #
 # [*groups*]
-#   List of sdditional groups the gitolite user should be a member of.
+#   List of additional groups the gitolite user should be a member of.
+#
+# [*comment*]
+#   Comment you wish to specify for the gitolite user.
 #
 # === Examples
 #
@@ -41,33 +44,61 @@ class gitolite::package::user (
 
   include gitolite::params
 
+   case $gid {
+    undef: {
+      $gid_real = $gitolite::params::group
+      $group_requires = Package[$gitolite::params::package]
+    }
+    default: {
+      $gid_real       = $gid
+      $group_requires = undef
+    }
+  }
+
+  Group[$gitolite::params::group] {
+    gid       =>  $gid_real,
+    requires  =>  $group_requires,
+  }
+
   $comment_real = $comment ? {
     undef   =>  $gitolite::params::user_comment,
     default =>  $comment,
   }
 
-  $uid_real = $uid ? {
-    undef   =>  $gitolite::params::user_uid,
-    default =>  $uid,
+  case $uid {
+    undef: {
+      $uid_real       = $gitolite::params::user_uid
+      $user_requires  = [
+        Package[$gitolite::params::package],
+        Group[$gitolite::params::group],
+      ]
+    }
+    default: {
+      $uid_real       = $uid
+      $user_requires  = Group[$gitolite::params::group]
+    }
   }
 
-  $gid_real = $gid ? {
-    undef   =>  $gitolite::params::group,
-    default =>  $gid,
-  }
-
-  $groups_real = $groups ? {
-    undef   =>  '',
-    default =>  $groups,
-  }
+  $groups_real = $groups
 
   User [$gitolite::params::user] {
     comment =>  $comment_real,
     uid     =>  $uid_real,
-    gid     =>  $gid_real,
-    groups  =>  $groups_real,
-    home    =>  $gitolite::params::home,
-    shell   =>  $gitolite::params::user_shell,
-    system  =>  true,
+    groups  +>  $groups_real,
+  }
+
+  if $uid and $gid {
+    $package_requires = [
+      User [$gitolite::params::user],
+      Group[$gitolite::params::group],
+    ]
+  } elsif $uid {
+    $package_requires = User [$gitolite::params::user]
+  } elsif $gid {
+    $package_requires = Group[$gitolite::params::group]
+  }
+
+  Package[$gitolite::params::package] {
+    require +> $package_requires,
   }
 }
