@@ -25,12 +25,7 @@
 
 [ -d hooks/post-receive.d ] || exit 0
 
-UNIXSECONDS=`date +%s`
-if [ ! -d /var/lib/gitolite/tmp ] ; then
-  mkdir -p /var/lib/gitolite/tmp
-fi
-
-STDINFILE="/var/lib/gitolite/tmp/post-receive-$UNIXSECONDS"
+STDINFILE=`mktemp --tmpdir post-recieve.stdin.XXXXXX`
 
 # preserve stdin to pass to the commands
 while read line ; do

@@ -15,7 +15,7 @@
     "TODO": "7b1b5dddc99e66e35aacda576fb74126",
     "files/id_rsa_test.pub": "b8afde689926e5556e91cab8a06dd2a6",
     "files/post-receive-email.sh": "212e89a6c19c1471f7f983dc9a230a3c",
-    "files/post-receive.sh": "528e6139e8bb15cc2e7132add5baea2e",
+    "files/post-receive.sh": "5f3b5a1258b2071fa39312e17eb2712c",
     "manifests/hooks.pp": "c669f865c662aec3d3cb6b0584d0d159",
     "manifests/hooks/post_receive.pp": "fe30209c4a65075d88739073dda2e06f",
     "manifests/hooks/post_receive_email.pp": "4f7a126d2784f0f5ea39097b22d73f69",
