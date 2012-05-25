@@ -47,8 +47,8 @@ class gitolite::params {
   }
 
   $user_groups = $::operatingsystem ? {
-    /(CentOS|Fedora|RedHat)/  => undef,
-    default                   => undef,
+    /(CentOS|Fedora|RedHat)/  => [],
+    default                   => [],
   }
 
   $user_shell = $::operatingsystem ? {
