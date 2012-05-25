@@ -56,8 +56,8 @@ class gitolite::package::user (
   }
 
   Group[$gitolite::params::group] {
-    gid       =>  $gid_real,
-    requires  =>  $group_requires,
+    gid     =>  $gid_real,
+    require =>  $group_requires,
   }
 
   $comment_real = $comment ? {
@@ -85,6 +85,7 @@ class gitolite::package::user (
     comment =>  $comment_real,
     uid     =>  $uid_real,
     groups  +>  $groups_real,
+    require =>  $user_requires,
   }
 
   if $uid and $gid {
