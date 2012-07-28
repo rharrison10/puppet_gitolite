@@ -1,4 +1,4 @@
-# == Class: gitolite::hooks::post_receive_email
+# == Class: gitolite::hooks::post_receive_email_hooklet
 #
 # Deploy the post-receive hook script to email push notifications provided with
 # git at contrib/hooks/post-receive-email
@@ -29,7 +29,15 @@
 #
 class gitolite::hooks::post_receive_email {
 
-  gitolite::hooks::post_receive { 'post-receive-email' :
-    source  =>  'puppet:///modules/gitolite/post-receive-email.sh',
+  file { "${gitolite::params::common_hook_dir}/post-receive.d/email":
+    ensure  => link,
+    target  => '/usr/share/git-core/contrib/hooks/post-receive-email',
+    owner   => 'gitolite',
+    group   => 'gitolite',
+    mode    => '0755',
+    require => [
+      Package['gitolite'],
+      File["${gitolite::params::common_hook_dir}/post-receive.d"],
+    ],
   }
 }

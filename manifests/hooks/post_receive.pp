@@ -1,29 +1,14 @@
-# == Define: gitolite::hooks::post_receive
+# == Class: gitolite::hooks::post_receive
 #
-# Deploy a script to be run by the post-receive hook script on gitolite repos
+# post-receive hook and the hooklet directory it uses.
 #
 # === Parameters
 #
-# Document parameters here
-#
-# [*source*]
-#   The source location of your post-receive hook script
-#
-# [*template*]
-#   A template or string providing the content of your post-receive
-#   hook script
+# None
 #
 # === Examples
 #
-#  class test{
-#    class { 'gitolite' :
-#      admin_key_source => 'puppet:///modules/test/id_rsa_test.pub',
-#      admin_user       => 'testuser',
-#    }
-#    gitolite::hooks::post_receive { 'test_script'
-#      source  =>  'puppet:///modules/test/test_script',
-#    }
-#  }
+#  include gitolite::post_receive
 #
 # === Authors
 #
@@ -33,43 +18,32 @@
 #
 # Copyright 2012 Russell Harrison, unless otherwise noted.
 #
-define gitolite::hooks::post_receive (
-    $source = '',
-    $template = ''
-  ){
-
+class gitolite::hooks::post_receive {
+  include gitolite::hooks
   include gitolite::package
   include gitolite::params
-  include gitolite::hooks
   include gitolite::refresh
 
-  $filename = "${gitolite::params::common_hook_dir}/post-receive.d/${name}"
-
-  if $template and $source {
-    fail('You cannot supply both template and source for gitolite::hooks::post_receive')
-  } elsif $template == '' and $source == '' {
-    fail('You must supply either a template or a source for gitolite::hooks::post_receive')
+  file { "${gitolite::params::common_hook_dir}/post-receive.d" :
+    ensure  =>  directory,
+    owner   =>  'gitolite',
+    group   =>  'gitolite',
+    mode    =>  '0775',
+    require =>  Package['gitolite'],
   }
 
-  $script_source = $source ? {
-    ''      =>  undef,
-    default =>  $source,
-  }
+  $receive_stage = 'post'
 
-  $script_template = $template ? {
-    ''      =>  undef,
-    default =>  $template,
-  }
-
-  file { $filename :
+  file { "${gitolite::params::common_hook_dir}/post-receive" :
     ensure  =>  file,
-    content =>  $script_template,
-    source  =>  $script_source,
+    content =>  template('gitolite/hooks/receive.sh.erb'),
     owner   =>  'gitolite',
     group   =>  'gitolite',
     mode    =>  '0755',
-    require =>  Package['gitolite'],
+    require =>  [
+      Package['gitolite'],
+      File["${gitolite::params::common_hook_dir}/post-receive.d"],
+    ],
     notify  =>  Exec['gl-setup -q'],
   }
-
 }

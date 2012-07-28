@@ -31,7 +31,6 @@ class gitolite::hooks {
   $hook_dirs = [
     "${gitolite::params::admindir}/hooks",
     $gitolite::params::common_hook_dir,
-    "${gitolite::params::common_hook_dir}/post-receive.d",
     "${gitolite::params::home}/tmp",
   ]
 
@@ -41,15 +40,5 @@ class gitolite::hooks {
     group   =>  'gitolite',
     mode    =>  '0775',
     require =>  Package['gitolite'],
-  }
-
-  file { "${gitolite::params::common_hook_dir}/post-receive" :
-    ensure  =>  file,
-    source  =>  'puppet:///modules/gitolite/post-receive.sh',
-    owner   =>  'gitolite',
-    group   =>  'gitolite',
-    mode    =>  '0755',
-    require =>  Package['gitolite'],
-    notify  =>  Exec['gl-setup -q'],
   }
 }
